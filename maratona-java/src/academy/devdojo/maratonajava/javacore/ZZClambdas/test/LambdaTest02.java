@@ -2,13 +2,16 @@ package academy.devdojo.maratonajava.javacore.ZZClambdas.test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
 
 public class LambdaTest02 {
     public static void main(String[] args) {
         List<String> strings = List.of("Natsu", "Alucard", "Goku");
-        List<Integer> integers = map(strings, (String s) -> s.length());
+        List<Integer> integers = map(strings, String::length);
+        List<String> map = map(strings, String::toUpperCase);
         System.out.println(integers);
+        System.out.println(map);
 
     }
 
