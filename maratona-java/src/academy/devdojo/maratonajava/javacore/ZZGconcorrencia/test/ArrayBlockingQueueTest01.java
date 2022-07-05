@@ -2,6 +2,7 @@ package academy.devdojo.maratonajava.javacore.ZZGconcorrencia.test;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingDeque;
+<<<<<<< HEAD
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
@@ -36,5 +37,12 @@ public class ArrayBlockingQueueTest01 {
                 e.printStackTrace();
             }
         }
+=======
+
+public class ArrayBlockingQueueTest01 {
+    public static void main(String[] args) throws InterruptedException {
+        BlockingDeque<String> bq = new ArrayBlockingQueue<>(1);
+        bq.put("William");
+>>>>>>> origin/main
     }
 }
