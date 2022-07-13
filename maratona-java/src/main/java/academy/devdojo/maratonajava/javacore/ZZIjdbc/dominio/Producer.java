@@ -1,4 +1,4 @@
-package academy.devdojo.maratonajava.ZZIjdbc.dominio;
+package academy.devdojo.maratonajava.javacore.ZZIjdbc.dominio;
 
 import lombok.Builder;
 import lombok.Value;

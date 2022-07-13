@@ -1,7 +1,7 @@
-package academy.devdojo.maratonajava.ZZIjdbc.repository;
+package academy.devdojo.maratonajava.javacore.ZZIjdbc.repository;
 
-import academy.devdojo.maratonajava.ZZIjdbc.conn.ConnectionFactory;
-import academy.devdojo.maratonajava.ZZIjdbc.dominio.Producer;
+import academy.devdojo.maratonajava.javacore.ZZIjdbc.conn.ConnectionFactory;
+import academy.devdojo.maratonajava.javacore.ZZIjdbc.dominio.Producer;
 import lombok.extern.log4j.Log4j2;
 
 import java.sql.*;
@@ -21,6 +21,35 @@ public class ProducerRepository {
             log.error("Error while trying to insert producer '{}'", producer.getName(), e);
             e.printStackTrace();
         }
+    }
+
+    public static void saveTransaction(List<Producer> producers) {
+        try (Connection conn = ConnectionFactory.getConnection()) {
+            conn.setAutoCommit(false);
+            preparedStatementSaveTransaction(conn, producers);
+            conn.commit();
+            conn.setAutoCommit(true);
+        } catch (SQLException e) {
+            log.error("Error while trying to update producers '{}'", producers, e);
+            e.printStackTrace();
+        }
+    }
+
+    private static void preparedStatementSaveTransaction(Connection conn, List<Producer> producers) throws SQLException {
+        String sql = "INSERT INTO `anime_store`.`producer` (`name`) VALUES (?);";
+        boolean shouldRollback = false;
+        for (Producer p : producers) {
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                log.info("Saving producer '{}'", p.getName());
+                ps.setString(1, p.getName());
+                ps.execute();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                shouldRollback = true;
+            }
+        }
+        if (shouldRollback) conn.rollback();
+        log.warn("Transaction is going to be rollback");
     }
 
     public static void delete(int id) {

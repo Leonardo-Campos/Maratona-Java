@@ -1,13 +1,17 @@
-package academy.devdojo.maratonajava.ZZIjdbc.service;
+package academy.devdojo.maratonajava.javacore.ZZIjdbc.service;
 
-import academy.devdojo.maratonajava.ZZIjdbc.dominio.Producer;
-import academy.devdojo.maratonajava.ZZIjdbc.repository.ProducerRepository;
+import academy.devdojo.maratonajava.javacore.ZZIjdbc.dominio.Producer;
+import academy.devdojo.maratonajava.javacore.ZZIjdbc.repository.ProducerRepository;
 
 import java.util.List;
 
 public class ProducerService {
     public static void save(Producer producer){
         ProducerRepository.save(producer);
+    }
+
+    public static void saveTransaction(List<Producer> producers) {
+        ProducerRepository.saveTransaction(producers);
     }
 
     public static void delete(Integer id){
