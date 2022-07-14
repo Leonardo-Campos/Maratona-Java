@@ -1,0 +1,1 @@
+SELECT * FROM anime_store.producer where name like '%%';
